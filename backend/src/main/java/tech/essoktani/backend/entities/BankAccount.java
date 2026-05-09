@@ -20,6 +20,8 @@ public class BankAccount {
     private String id;
     private Date CreatedAt;
     private Double balance;
+
+    @Enumerated(EnumType.STRING)
     private AccountStatus AccStatus;
     private String Currency;
 
