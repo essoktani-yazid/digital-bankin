@@ -23,6 +23,47 @@ public class BackendApplication {
     }
 
     @Bean
+    CommandLineRunner commandLineRunner(BankAccountRepository bankAccountRepository) {
+        return args -> {
+
+            BankAccount bankAccount = bankAccountRepository
+                    .findById("11eae1bd-b3b9-4f48-92f2-33c5a63ebffa")
+                    .orElse(null);
+
+            if (bankAccount != null) {
+
+                System.out.println(bankAccount.getId());
+                System.out.println(bankAccount.getBalance());
+                System.out.println(bankAccount.getAccStatus());
+                System.out.println(bankAccount.getCreatedAt());
+                System.out.println(bankAccount.getCustomer().getName());
+                System.out.println(bankAccount.getClass().getSimpleName());
+
+                if (bankAccount instanceof CurrentAccount) {
+                    System.out.println("Over draft => "
+                            + ((CurrentAccount) bankAccount).getOverDraft());
+
+                } else if (bankAccount instanceof SavingAccount) {
+                    System.out.println("Rate => "
+                            + ((SavingAccount) bankAccount).getInterestRate());
+                }
+
+                bankAccount.getAccountOperations().forEach(op -> {
+                    System.out.println("============");
+                    System.out.println(
+                            op.getType() + "\t"
+                                    + op.getOperationDate() + "\t"
+                                    + op.getAmount()
+                    );
+                });
+
+            } else {
+                System.out.println("Bank account not found");
+            }
+        };
+    }
+
+//    @Bean
     CommandLineRunner start(CustomerRepository customerRepository,
                             BankAccountRepository bankAccountRepository,
                             AccountOperationRepository accountOperationRepository) {
