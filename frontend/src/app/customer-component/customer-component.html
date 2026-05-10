@@ -1,0 +1,49 @@
+<style>
+  .loadnig {
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 2rem;
+  }
+</style>
+
+<ng-container>
+
+  <div *ngIf="customers | async as customers; else failureOrLoading">
+    <div class="card mt-4">
+      <div class="card-header">
+        Customers
+      </div>
+
+      <div class="card-body">
+        <table class="table table-striped">
+          <thead>
+          <tr>
+            <th>#</th>
+            <th>Name</th>
+            <th>Email</th>
+          </tr>
+          </thead>
+
+          <tbody>
+          <tr *ngFor="let customer of customers">
+            <td>{{ customer.id }}</td>
+            <td>{{ customer.name }}</td>
+            <td>{{ customer.email }}</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <ng-template #failureOrLoading>
+    <div *ngIf="errorMessage; else loading">
+      <p class="text-danger">{{ errorMessage }}</p>
+    </div>
+    <ng-template #loading>
+      <div class="loadnig">Loading...</div>
+    </ng-template>
+  </ng-template>
+
+</ng-container>
