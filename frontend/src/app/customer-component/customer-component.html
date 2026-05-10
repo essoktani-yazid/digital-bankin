@@ -16,21 +16,30 @@
       </div>
 
       <div class="card-body">
+        <div *ngIf="searchFormGroup">
+          <form [formGroup]="searchFormGroup" (ngSubmit)="handleSearchCustomers()">
+            <div class="input-group">
+              <label class="input-group-text">Keyword :</label>
+              <input type="text" formControlName="keyword" class="form-control">
+              <button class="btn btn-info">Search</button>
+            </div>
+          </form>
+        </div>
         <table class="table table-striped">
           <thead>
-          <tr>
-            <th>#</th>
-            <th>Name</th>
-            <th>Email</th>
-          </tr>
+            <tr>
+              <th>#</th>
+              <th>Name</th>
+              <th>Email</th>
+            </tr>
           </thead>
 
           <tbody>
-          <tr *ngFor="let customer of customers">
-            <td>{{ customer.id }}</td>
-            <td>{{ customer.name }}</td>
-            <td>{{ customer.email }}</td>
-          </tr>
+            <tr *ngFor="let customer of customers">
+              <td>{{ customer.id }}</td>
+              <td>{{ customer.name }}</td>
+              <td>{{ customer.email }}</td>
+            </tr>
           </tbody>
         </table>
       </div>
