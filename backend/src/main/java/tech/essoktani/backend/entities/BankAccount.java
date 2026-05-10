@@ -28,7 +28,7 @@ public class BankAccount {
     @ManyToOne
     private Customer customer;
 
-    @OneToMany(mappedBy = "bankAccount",fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "bankAccount")
     private List<AccountOperation>accountOperations;
 
 }
