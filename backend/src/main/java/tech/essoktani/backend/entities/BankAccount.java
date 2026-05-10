@@ -18,17 +18,17 @@ public class BankAccount {
 
     @Id
     private String id;
-    private Date CreatedAt;
+    private Date createdAt;
     private Double balance;
 
     @Enumerated(EnumType.STRING)
-    private AccountStatus AccStatus;
-    private String Currency;
+    private AccountStatus accStatus;
+    private String currency;
 
     @ManyToOne
     private Customer customer;
 
     @OneToMany(mappedBy = "bankAccount")
-    private List<AccountOperation>accountOperations;
+    private List<AccountOperation> accountOperations;
 
 }
