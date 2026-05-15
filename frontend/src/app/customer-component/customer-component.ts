@@ -1,4 +1,4 @@
-import { Component, OnInit, signal } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CustomerService } from '../services/customer-service';
 import { CommonModule } from '@angular/common';
 import { Observable, throwError } from 'rxjs';
@@ -8,9 +8,10 @@ import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-customer-component',
+  standalone: true,
   imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './customer-component.html',
-  styleUrl: './customer-component.css',
+  styleUrls: ['./customer-component.css'],
 })
 export class CustomerComponent implements OnInit{
 
