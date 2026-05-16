@@ -1,0 +1,22 @@
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+
+import { NewCustomerComponent } from './new-customer-component';
+
+describe('NewCustomerComponent', () => {
+  let component: NewCustomerComponent;
+  let fixture: ComponentFixture<NewCustomerComponent>;
+
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      imports: [NewCustomerComponent],
+    }).compileComponents();
+
+    fixture = TestBed.createComponent(NewCustomerComponent);
+    component = fixture.componentInstance;
+    await fixture.whenStable();
+  });
+
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+});
