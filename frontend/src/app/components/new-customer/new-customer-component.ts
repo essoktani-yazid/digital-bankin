@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CustomerService } from '../../services/customer-service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-new-customer-component',
-  imports: [ ReactiveFormsModule ],
+  imports: [ CommonModule, ReactiveFormsModule ],
   templateUrl: './new-customer-component.html',
   styleUrl: './new-customer-component.css',
 })
@@ -12,12 +14,12 @@ export class NewCustomerComponent implements OnInit{
 
   newCustomerFormGroup!: any;
 
-  constructor(private formBuilder: FormBuilder, private customerService: CustomerService) {}
+  constructor(private formBuilder: FormBuilder, private customerService: CustomerService, private router: Router) {}
 
   ngOnInit(): void {
     this.newCustomerFormGroup = this.formBuilder.group({
-      name: this.formBuilder.control(''),
-      email: this.formBuilder.control(''),
+      name: this.formBuilder.control('', [Validators.required, Validators.minLength(4)]),
+      email: this.formBuilder.control('', [Validators.required, Validators.email]),
     });
   }
 
@@ -25,7 +27,7 @@ export class NewCustomerComponent implements OnInit{
     const customer = this.newCustomerFormGroup.value;
     this.customerService.saveCustomer(customer).subscribe({
       next: date => {
-        alert("Success!");
+        this.router.navigate(['/customers']);
       },
       error: err => {
         console.log(err.message);

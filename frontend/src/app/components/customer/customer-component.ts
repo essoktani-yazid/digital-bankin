@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Observable, throwError } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import { catchError, map } from 'rxjs/operators';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { Customer } from '../../models/customer.model';
 import { CustomerService } from '../../services/customer-service';
@@ -41,6 +41,22 @@ export class CustomerComponent implements OnInit{
         return throwError(() => new Error(this.errorMessage));
       })
     );
+  }
+
+  public handleCustomerDelete(customer: Customer): void {
+    if (confirm("Are you sure to delete this customer?"))
+    this.customerService.deleteCustomer(customer).subscribe({
+      next: date => {
+        this.customers = this.customers.pipe(
+          map((customers) => {
+            return customers.filter((c) => c.id !== customer.id);
+          })
+        );
+      },
+      error: err => {
+        console.log(err.message);
+      }
+    });
   }
 
 }

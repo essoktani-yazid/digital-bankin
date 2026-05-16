@@ -19,7 +19,7 @@ public class Customer {
     private String name;
     private String email;
 
-    @OneToMany(mappedBy = "customer")
+    @OneToMany(mappedBy = "customer", cascade = CascadeType.REMOVE)
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private List<BankAccount> BankAccounts;
 }

@@ -23,4 +23,8 @@ export class CustomerService {
     return this.http.post<Customer>(environment.backendHost + "/customers", customer);
   }
 
+  public deleteCustomer(customer: Customer): Observable<void> {
+    return this.http.delete<void>(environment.backendHost + "/customers/" + customer.id);
+  }
+
 }
